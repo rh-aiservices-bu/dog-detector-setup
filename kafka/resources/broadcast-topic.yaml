@@ -1,0 +1,12 @@
+apiVersion: kafka.strimzi.io/v1beta1
+kind: KafkaTopic
+metadata:
+  name: images
+  labels:
+    strimzi.io/cluster: object-detection
+spec:
+  partitions: 1
+  replicas: 1
+  topicName: broadcast
+  config:
+    retention.ms: 0
