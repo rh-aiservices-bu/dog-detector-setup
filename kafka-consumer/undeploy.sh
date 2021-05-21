@@ -3,4 +3,4 @@ printf "\n\n######## deploy ########\n"
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-oc project ${OC_PROJECT} && oc delete -f "${DIR}/app.yaml"
+oc project ${OC_PROJECT} && oc delete all -l app=dog-detector-kafka-consumer

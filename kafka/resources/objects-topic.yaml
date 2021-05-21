@@ -1,10 +1,10 @@
-apiVersion: kafka.strimzi.io/v1beta1
+apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaTopic
 metadata:
   name: objects
   labels:
     strimzi.io/cluster: object-detection
-    app: object-detection-common
+    app: object-detection-kafka
 spec:
   partitions: 1
   replicas: 1

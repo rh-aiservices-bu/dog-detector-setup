@@ -38,15 +38,15 @@ undeploy-kafka: login
 
 ##################################
 
-.PHONY: deploy-common
-deploy-common: login
-	./common/deploy.sh
-
-##################################
-
-.PHONY: undeploy-common
-undeploy-common: login
-	./common/undeploy.sh
+#.PHONY: deploy-common
+#deploy-common: login
+#	./common/deploy.sh
+#
+###################################
+#
+#.PHONY: undeploy-common
+#undeploy-common: login
+#	./common/undeploy.sh
 
 ##################################
 
@@ -87,11 +87,11 @@ undeploy-kafka-consumer: login
 ##################################
 
 .PHONY: deploy
-deploy: login deploy-prereqs deploy-app deploy-rest-service deploy-kafka-consumer
+deploy: login deploy-kafka deploy-app deploy-rest-service deploy-kafka-consumer
 
 ##################################
 
 .PHONY: undeploy
-deploy: login undeploy-kafka-consumer undeploy-rest-service undeploy-app undeploy-prereqs
+undeploy: login undeploy-kafka-consumer undeploy-rest-service undeploy-app undeploy-kafka
 
 ##################################

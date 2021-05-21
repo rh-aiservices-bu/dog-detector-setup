@@ -1,1 +1,2 @@
-# object-detection-setup
+# dog-detector-setup
+
