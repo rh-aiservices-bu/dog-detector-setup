@@ -1,16 +1,25 @@
-DEFAULT_ENV_FILE := .env.default
+DEFAULT_ENV_FILE := .env
 ifneq ("$(wildcard $(DEFAULT_ENV_FILE))","")
 include ${DEFAULT_ENV_FILE}
 export $(shell sed 's/=.*//' ${DEFAULT_ENV_FILE})
 endif
 
-ENV_FILE := .env
+ENV_FILE := .env.local
 ifneq ("$(wildcard $(ENV_FILE))","")
 include ${ENV_FILE}
 export $(shell sed 's/=.*//' ${ENV_FILE})
 endif
 
 
+##################################
+
+.PHONY: deploy
+deploy: login deploy-kafka deploy-app deploy-rest-service deploy-kafka-consumer
+
+##################################
+
+.PHONY: undeploy
+undeploy: login undeploy-kafka-consumer undeploy-rest-service undeploy-app undeploy-kafka
 
 ##################################
 
@@ -35,18 +44,6 @@ deploy-kafka: login
 .PHONY: undeploy-kafka
 undeploy-kafka: login
 	./kafka/undeploy.sh
-
-##################################
-
-#.PHONY: deploy-common
-#deploy-common: login
-#	./common/deploy.sh
-#
-###################################
-#
-#.PHONY: undeploy-common
-#undeploy-common: login
-#	./common/undeploy.sh
 
 ##################################
 
@@ -83,15 +80,5 @@ deploy-kafka-consumer: login
 .PHONY: undeploy-kafka-consumer
 undeploy-kafka-consumer: login
 	./kafka-consumer/undeploy.sh
-
-##################################
-
-.PHONY: deploy
-deploy: login deploy-kafka deploy-app deploy-rest-service deploy-kafka-consumer
-
-##################################
-
-.PHONY: undeploy
-undeploy: login undeploy-kafka-consumer undeploy-rest-service undeploy-app undeploy-kafka
 
 ##################################
