@@ -14,7 +14,13 @@ Prerequesites:
 
 ## Deploying to an OpenShift Cluster
 
-#### Login Information
+#### Log in to your cluster
+```shell
+$ oc login --token=sha256~_mytoken --server=https://api.mycluster.com:6443
+Logged into "https://api.mycluster.com:6443" as "user" using the token provided.
+```
+**Alternatively**, you can add login information to your `.env.local` and execute it as part of your scripts
+
 Customize the `.env.local` file to include OpenShift login information
 ```.dotenv
 # using token
@@ -45,7 +51,7 @@ KAFKA_CONSUMER_GIT_REPO=https://github.com/your-org/dog-detector-kafka-consumer.
 ```
 
 #### Execute Deployment
-Now execute the deployment scripts.
+While logged into your cluster, execute the deployment scripts.
 ```shell script
 $ make deploy
 ```

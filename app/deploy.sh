@@ -27,6 +27,4 @@ oc expose svc/dog-detector-app \
 -l 'app.kubernetes.io/instance=dog-detector-app' \
 -l 'app.kubernetes.io/part-of=dog-detector-app'
 
-
-oc patch -n dog-detector-2 route dog-detector-app --type=merge -p '{"spec": {"tls": {"termination": "edge", "insecureEdgeTerminationPolicy": "Redirect"} }}'
 oc patch -n ${OC_PROJECT} route dog-detector-app --type=merge -p '{"spec": {"tls": {"termination": "edge", "insecureEdgeTerminationPolicy": "Redirect"} }}'

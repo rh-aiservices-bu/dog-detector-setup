@@ -14,16 +14,16 @@ endif
 ##################################
 
 .PHONY: deploy
-deploy: login deploy-kafka deploy-app deploy-rest-service deploy-kafka-consumer
+deploy: deploy-kafka deploy-app deploy-rest-service deploy-kafka-consumer
 
 ##################################
 
 .PHONY: undeploy
-undeploy: login undeploy-kafka-consumer undeploy-rest-service undeploy-app undeploy-kafka
+undeploy: undeploy-kafka-consumer undeploy-rest-service undeploy-app undeploy-kafka
 
 ##################################
 
-.PHONY: login
+.PHONY:
 login:
 ifdef OC_TOKEN
 	$(info **** Using OC_TOKEN for login ****)
@@ -36,49 +36,49 @@ endif
 ##################################
 
 .PHONY: deploy-kafka
-deploy-kafka: login
+deploy-kafka:
 	./kafka/deploy.sh
 
 ##################################
 
 .PHONY: undeploy-kafka
-undeploy-kafka: login
+undeploy-kafka:
 	./kafka/undeploy.sh
 
 ##################################
 
 .PHONY: deploy-app
-deploy-app: login
+deploy-app:
 	./app/deploy.sh
 
 ##################################
 
 .PHONY: undeploy-app
-undeploy-app: login
+undeploy-app:
 	./app/undeploy.sh
 
 ##################################
 
 .PHONY: deploy-rest-service
-deploy-rest-service: login
+deploy-rest-service:
 	./rest-service/deploy.sh
 
 ##################################
 
 .PHONY: undeploy-rest-service
-undeploy-rest-service: login
+undeploy-rest-service:
 	./rest-service/undeploy.sh
 
 ##################################
 
 .PHONY: deploy-kafka-consumer
-deploy-kafka-consumer: login
+deploy-kafka-consumer:
 	./kafka-consumer/deploy.sh
 
 ##################################
 
 .PHONY: undeploy-kafka-consumer
-undeploy-kafka-consumer: login
+undeploy-kafka-consumer:
 	./kafka-consumer/undeploy.sh
 
 ##################################
