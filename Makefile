@@ -14,12 +14,12 @@ endif
 ##################################
 
 .PHONY: deploy
-deploy: deploy-kafka deploy-app deploy-rest-service deploy-kafka-consumer
+deploy: deploy-kafka deploy-common deploy-app deploy-rest-service deploy-kafka-consumer
 
 ##################################
 
 .PHONY: undeploy
-undeploy: undeploy-kafka-consumer undeploy-rest-service undeploy-app undeploy-kafka
+undeploy: undeploy-kafka-consumer undeploy-rest-service undeploy-app undeploy-common undeploy-kafka
 
 ##################################
 
@@ -31,6 +31,11 @@ ifdef OC_TOKEN
 else
 	$(info **** Using OC_USER and OC_PASSWORD for login ****)
 	oc login ${OC_URL} -u ${OC_USER} -p ${OC_PASSWORD} --insecure-skip-tls-verify=true
+endif
+ifdef OC_PROJECT
+	$(info **** Setting project ****)
+	oc project ${OC_PROJECT} 2> /dev/null || oc new-project ${OC_PROJECT}
+	oc project
 endif
 
 ##################################
@@ -44,6 +49,18 @@ deploy-kafka:
 .PHONY: undeploy-kafka
 undeploy-kafka:
 	./kafka/undeploy.sh
+
+##################################
+
+.PHONY: deploy-common
+deploy-common:
+	./common/deploy.sh
+
+##################################
+
+.PHONY: undeploy-common
+undeploy-common:
+	./common/undeploy.sh
 
 ##################################
 
