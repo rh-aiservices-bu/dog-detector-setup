@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Template
 
 labels:
-  application: dog-detector-common
+  application: dog-detector
 
 metadata:
   name: dog-detector-common
